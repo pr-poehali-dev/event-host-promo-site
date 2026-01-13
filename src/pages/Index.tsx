@@ -25,28 +25,46 @@ const Index = () => {
 
   const services = [
     {
-      icon: "Heart",
-      title: "Свадьбы",
-      description: "Сделаю ваш главный день незабываемым: от романтичной церемонии до зажигательной вечеринки",
+      icon: "Music",
+      title: "DJ & Музыка",
+      description: "Профессиональное музыкальное сопровождение: от романтичных мелодий до танцпола до утра",
+      color: "from-violet-500 to-purple-500",
+      features: ["Современное оборудование", "Библиотека 10000+ треков", "Работа с заявками гостей"]
+    },
+    {
+      icon: "Lightbulb",
+      title: "Свет & Спецэффекты",
+      description: "Создам неповторимую атмосферу с помощью профессионального светового оформления",
+      color: "from-amber-500 to-orange-500",
+      features: ["LED-панели", "Дым-машина", "Световое шоу"]
+    },
+    {
+      icon: "Trophy",
+      title: "Интерактивы & Конкурсы",
+      description: "Авторские игры и конкурсы, которые зажгут любую публику и создадут вау-эффект",
+      color: "from-emerald-500 to-teal-500",
+      features: ["Уникальные сценарии", "Реквизит включён", "Подарки победителям"]
+    },
+    {
+      icon: "Camera",
+      title: "Фото & Видео",
+      description: "Профессиональная съёмка мероприятия + монтаж клипа в подарок",
       color: "from-pink-500 to-rose-500",
+      features: ["2 камеры", "Дрон-съёмка", "Обработка за 7 дней"]
     },
     {
-      icon: "Briefcase",
-      title: "Корпоративы",
-      description: "Профессиональное проведение мероприятий: тимбилдинги, банкеты, презентации с изюминкой",
+      icon: "Mic",
+      title: "Ведение церемонии",
+      description: "Торжественное и душевное проведение официальной части любого формата",
       color: "from-blue-500 to-cyan-500",
+      features: ["Продуманный тайминг", "Адаптация под гостей", "Без пошлости"]
     },
     {
-      icon: "Cake",
-      title: "Юбилеи",
-      description: "Создам тёплую атмосферу для празднования важных дат: от 18 до 80 лет",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: "Gamepad2",
-      title: "Мафия и настолки",
-      description: "Организую захватывающие игровые вечера: мафия, бункер и другие интерактивные игры",
-      color: "from-orange-500 to-red-500",
+      icon: "PartyPopper",
+      title: "Тематические вечеринки",
+      description: "Организация мероприятий в стиле: Gatsby, Мафия, Гарри Поттер, 90-е и другие",
+      color: "from-fuchsia-500 to-pink-500",
+      features: ["Декорации", "Костюмы персонажей", "Погружение в атмосферу"]
     },
   ];
 
@@ -199,29 +217,68 @@ const Index = () => {
 
       <section id="services" className="py-20 px-6 bg-muted/30">
         <div className="container mx-auto">
-          <h2 className="text-5xl font-bold text-center mb-4 text-gradient">Услуги</h2>
-          <p className="text-center text-muted-foreground mb-16 text-lg">
-            Подберу формат под ваше мероприятие
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="text-center mb-16">
+            <div className="inline-block mb-4">
+              <span className="px-4 py-2 rounded-full bg-primary/20 text-primary text-sm font-semibold">
+                💼 Что я предлагаю
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold mb-4 text-gradient">Комплексные услуги</h2>
+            <p className="text-center text-muted-foreground text-xl max-w-2xl mx-auto">
+              Всё для вашего мероприятия: от музыки до света. Работаю как полноценная event-команда
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {services.map((service, index) => (
               <Card
                 key={index}
-                className={`p-8 cursor-pointer card-hover bg-card border-2 transition-all duration-500 ${
-                  activeService === index ? 'border-primary scale-105' : 'border-transparent'
+                className={`p-6 cursor-pointer card-hover bg-card border-2 transition-all duration-500 group relative overflow-hidden ${
+                  activeService === index ? 'border-primary' : 'border-transparent'
                 }`}
                 onMouseEnter={() => setActiveService(index)}
                 onMouseLeave={() => setActiveService(null)}
               >
-                <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 mx-auto floating`}>
-                  <Icon name={service.icon} size={40} className="text-white" />
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                <div className="relative z-10">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 shadow-lg`}>
+                    <Icon name={service.icon} size={32} className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    {service.description}
+                  </p>
+                  <div className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-sm">
+                        <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.color}`}></div>
+                        <span className="text-muted-foreground">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-center">{service.title}</h3>
-                <p className="text-muted-foreground text-center leading-relaxed">
-                  {service.description}
-                </p>
               </Card>
             ))}
+          </div>
+          
+          <div className="mt-16 text-center">
+            <Card className="inline-block p-8 bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
+              <div className="flex items-center gap-8 flex-wrap justify-center">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-gradient mb-1">500+</div>
+                  <div className="text-sm text-muted-foreground">Мероприятий</div>
+                </div>
+                <div className="h-12 w-px bg-border"></div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-gradient mb-1">8+</div>
+                  <div className="text-sm text-muted-foreground">Лет опыта</div>
+                </div>
+                <div className="h-12 w-px bg-border"></div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-gradient mb-1">98%</div>
+                  <div className="text-sm text-muted-foreground">Довольных клиентов</div>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
