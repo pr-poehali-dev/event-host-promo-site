@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Icon from "@/components/ui/icon";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Index = () => {
   const [activeService, setActiveService] = useState<number | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const services = [
     {
@@ -65,18 +80,95 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted overflow-x-hidden">
-      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gradient">🎭 Ведущий Мероприятий</h1>
-          <div className="flex gap-6 items-center">
-            <a href="#services" className="hover:text-primary transition-colors">Услуги</a>
-            <a href="#portfolio" className="hover:text-primary transition-colors">Портфолио</a>
-            <a href="#testimonials" className="hover:text-primary transition-colors">Отзывы</a>
-            <a href="#contact" className="hover:text-primary transition-colors">Контакты</a>
-            <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-background/95 backdrop-blur-xl shadow-2xl shadow-primary/10 py-3' 
+          : 'bg-background/60 backdrop-blur-md py-5'
+      } border-b border-border/50`}>
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="text-3xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+              🎭
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gradient">Ведущий Мероприятий</h1>
+              <p className="text-xs text-muted-foreground">Ваш идеальный праздник</p>
+            </div>
+          </a>
+          
+          <div className="hidden lg:flex gap-8 items-center">
+            <a href="#services" className="relative group text-sm font-medium">
+              <span className="hover:text-primary transition-colors">Услуги</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#portfolio" className="relative group text-sm font-medium">
+              <span className="hover:text-primary transition-colors">Портфолио</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#testimonials" className="relative group text-sm font-medium">
+              <span className="hover:text-primary transition-colors">Отзывы</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#contact" className="relative group text-sm font-medium">
+              <span className="hover:text-primary transition-colors">Контакты</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-secondary transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <Button className="bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 hover-scale shadow-lg shadow-primary/30">
+              <Icon name="Sparkles" className="mr-2" size={16} />
               Заказать
             </Button>
           </div>
+
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild className="lg:hidden">
+              <Button variant="ghost" size="icon" className="hover:bg-primary/20">
+                <Icon name="Menu" size={24} />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-xl border-l border-border/50">
+              <div className="flex flex-col gap-6 mt-8">
+                <a 
+                  href="#services" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 text-lg font-medium hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/10"
+                >
+                  <Icon name="Briefcase" size={20} />
+                  Услуги
+                </a>
+                <a 
+                  href="#portfolio" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 text-lg font-medium hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/10"
+                >
+                  <Icon name="Image" size={20} />
+                  Портфолио
+                </a>
+                <a 
+                  href="#testimonials" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 text-lg font-medium hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/10"
+                >
+                  <Icon name="Star" size={20} />
+                  Отзывы
+                </a>
+                <a 
+                  href="#contact" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-3 text-lg font-medium hover:text-primary transition-colors p-3 rounded-lg hover:bg-primary/10"
+                >
+                  <Icon name="MessageCircle" size={20} />
+                  Контакты
+                </a>
+                <Button 
+                  className="w-full bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 mt-4 shadow-lg shadow-primary/30"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Icon name="Sparkles" className="mr-2" size={16} />
+                  Заказать
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
 
