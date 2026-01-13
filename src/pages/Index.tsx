@@ -473,9 +473,7 @@ const Index = () => {
               <Icon name="Facebook" size={28} />
             </a>
           </div>
-          <p className="mt-8 text-sm text-muted-foreground">
-            © 2024 Все права защищены
-          </p>
+          <p className="mt-8 text-sm text-muted-foreground">© 2026 Все права защищены</p>
         </div>
       </footer>
     </div>
