@@ -1,12 +1,280 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import Icon from "@/components/ui/icon";
 
 const Index = () => {
+  const [activeService, setActiveService] = useState<number | null>(null);
+
+  const services = [
+    {
+      icon: "Heart",
+      title: "Свадьбы",
+      description: "Сделаю ваш главный день незабываемым: от романтичной церемонии до зажигательной вечеринки",
+      color: "from-pink-500 to-rose-500",
+    },
+    {
+      icon: "Briefcase",
+      title: "Корпоративы",
+      description: "Профессиональное проведение мероприятий: тимбилдинги, банкеты, презентации с изюминкой",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: "Cake",
+      title: "Юбилеи",
+      description: "Создам тёплую атмосферу для празднования важных дат: от 18 до 80 лет",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: "Gamepad2",
+      title: "Мафия и настолки",
+      description: "Организую захватывающие игровые вечера: мафия, бункер и другие интерактивные игры",
+      color: "from-orange-500 to-red-500",
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "Анна Петрова",
+      event: "Свадьба",
+      text: "Наша свадьба прошла просто волшебно! Гости до сих пор вспоминают конкурсы и атмосферу праздника.",
+      rating: 5,
+    },
+    {
+      name: "Михаил Иванов",
+      event: "Корпоратив",
+      text: "Профессионализм на высшем уровне! Смогли расслабить даже самых серьёзных коллег.",
+      rating: 5,
+    },
+    {
+      name: "Елена Смирнова",
+      event: "Юбилей 50 лет",
+      text: "Спасибо за замечательный вечер! Все гости были в восторге, программа продумана до мелочей.",
+      rating: 5,
+    },
+  ];
+
+  const portfolio = [
+    { title: "Свадьба в усадьбе", guests: 120, year: 2024 },
+    { title: "Корпоратив IT-компании", guests: 80, year: 2024 },
+    { title: "Юбилей 60 лет", guests: 50, year: 2023 },
+    { title: "Тимбилдинг с Мафией", guests: 40, year: 2024 },
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted overflow-x-hidden">
+      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-gradient">🎭 Ведущий Мероприятий</h1>
+          <div className="flex gap-6 items-center">
+            <a href="#services" className="hover:text-primary transition-colors">Услуги</a>
+            <a href="#portfolio" className="hover:text-primary transition-colors">Портфолио</a>
+            <a href="#testimonials" className="hover:text-primary transition-colors">Отзывы</a>
+            <a href="#contact" className="hover:text-primary transition-colors">Контакты</a>
+            <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+              Заказать
+            </Button>
+          </div>
+        </div>
+      </nav>
+
+      <section className="pt-32 pb-20 px-6">
+        <div className="container mx-auto text-center">
+          <div className="floating mb-8">
+            <div className="text-8xl mb-6">🎉</div>
+          </div>
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 text-gradient fade-in">
+            Ваше Мероприятие —<br />Моя Миссия!
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto fade-in">
+            Профессиональное проведение свадеб, корпоративов, юбилеев и игровых вечеров.<br />
+            Опыт 8+ лет • 500+ мероприятий • 100% энергии
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap fade-in">
+            <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 hover-scale text-lg px-8">
+              <Icon name="Calendar" className="mr-2" />
+              Забронировать дату
+            </Button>
+            <Button size="lg" variant="outline" className="hover-scale text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white">
+              <Icon name="Play" className="mr-2" />
+              Посмотреть видео
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-4 text-gradient">Услуги</h2>
+          <p className="text-center text-muted-foreground mb-16 text-lg">
+            Подберу формат под ваше мероприятие
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => (
+              <Card
+                key={index}
+                className={`p-8 cursor-pointer card-hover bg-card border-2 transition-all duration-500 ${
+                  activeService === index ? 'border-primary scale-105' : 'border-transparent'
+                }`}
+                onMouseEnter={() => setActiveService(index)}
+                onMouseLeave={() => setActiveService(null)}
+              >
+                <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 mx-auto floating`}>
+                  <Icon name={service.icon} size={40} className="text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-center">{service.title}</h3>
+                <p className="text-muted-foreground text-center leading-relaxed">
+                  {service.description}
+                </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" className="py-20 px-6">
+        <div className="container mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-4 text-gradient">Портфолио</h2>
+          <p className="text-center text-muted-foreground mb-16 text-lg">
+            Последние проведённые мероприятия
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {portfolio.map((item, index) => (
+              <Card key={index} className="overflow-hidden hover-scale bg-card border-border">
+                <div className="h-48 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                  <Icon name="Image" size={64} className="text-primary/40" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Icon name="Users" size={16} />
+                      {item.guests} гостей
+                    </span>
+                    <span>{item.year}</span>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto">
+          <h2 className="text-5xl font-bold text-center mb-4 text-gradient">Отзывы</h2>
+          <p className="text-center text-muted-foreground mb-16 text-lg">
+            Что говорят мои клиенты
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="p-8 hover-scale bg-card border-border">
+                <div className="flex items-center gap-2 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Icon key={i} name="Star" size={20} className="text-accent fill-accent" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-6 leading-relaxed italic">
+                  "{testimonial.text}"
+                </p>
+                <div>
+                  <p className="font-bold">{testimonial.name}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.event}</p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="py-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-5xl font-bold text-center mb-4 text-gradient">Связаться со мной</h2>
+          <p className="text-center text-muted-foreground mb-16 text-lg">
+            Расскажите о вашем мероприятии, и я подберу лучший формат
+          </p>
+          <Card className="p-8 md:p-12 bg-card border-border">
+            <form className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block mb-2 font-medium">Ваше имя</label>
+                  <Input placeholder="Иван Иванов" className="bg-background border-border" />
+                </div>
+                <div>
+                  <label className="block mb-2 font-medium">Телефон</label>
+                  <Input placeholder="+7 (999) 123-45-67" className="bg-background border-border" />
+                </div>
+              </div>
+              <div>
+                <label className="block mb-2 font-medium">Тип мероприятия</label>
+                <Input placeholder="Свадьба, корпоратив, юбилей..." className="bg-background border-border" />
+              </div>
+              <div>
+                <label className="block mb-2 font-medium">Дата мероприятия</label>
+                <Input type="date" className="bg-background border-border" />
+              </div>
+              <div>
+                <label className="block mb-2 font-medium">Количество гостей</label>
+                <Input type="number" placeholder="50" className="bg-background border-border" />
+              </div>
+              <div>
+                <label className="block mb-2 font-medium">Комментарий</label>
+                <Textarea 
+                  placeholder="Расскажите подробнее о вашем мероприятии..."
+                  className="bg-background border-border min-h-32"
+                />
+              </div>
+              <Button 
+                className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-lg py-6"
+                size="lg"
+              >
+                <Icon name="Send" className="mr-2" />
+                Отправить заявку
+              </Button>
+            </form>
+          </Card>
+
+          <div className="mt-12 flex justify-center gap-8 flex-wrap">
+            <a href="tel:+79991234567" className="flex items-center gap-2 text-lg hover:text-primary transition-colors hover-scale">
+              <Icon name="Phone" />
+              +7 (999) 123-45-67
+            </a>
+            <a href="https://wa.me/79991234567" className="flex items-center gap-2 text-lg hover:text-primary transition-colors hover-scale">
+              <Icon name="MessageCircle" />
+              WhatsApp
+            </a>
+            <a href="https://t.me/username" className="flex items-center gap-2 text-lg hover:text-primary transition-colors hover-scale">
+              <Icon name="Send" />
+              Telegram
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-12 px-6 border-t border-border bg-muted/20">
+        <div className="container mx-auto text-center">
+          <h3 className="text-2xl font-bold mb-4 text-gradient">🎭 Ведущий Мероприятий</h3>
+          <p className="text-muted-foreground mb-6">
+            Делаю праздники незабываемыми с 2016 года
+          </p>
+          <div className="flex justify-center gap-6">
+            <a href="#" className="hover:text-primary transition-colors hover-scale">
+              <Icon name="Instagram" size={28} />
+            </a>
+            <a href="#" className="hover:text-primary transition-colors hover-scale">
+              <Icon name="Youtube" size={28} />
+            </a>
+            <a href="#" className="hover:text-primary transition-colors hover-scale">
+              <Icon name="Facebook" size={28} />
+            </a>
+          </div>
+          <p className="mt-8 text-sm text-muted-foreground">
+            © 2024 Все права защищены
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
