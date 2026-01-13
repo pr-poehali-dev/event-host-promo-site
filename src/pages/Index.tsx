@@ -190,27 +190,81 @@ const Index = () => {
         </div>
       </nav>
 
-      <section className="pt-32 pb-20 px-6">
-        <div className="container mx-auto text-center">
-          <div className="floating mb-8">
-            <div className="text-8xl mb-6">🎉</div>
+      <section className="relative pt-32 pb-24 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 mb-8 fade-in">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+              <span className="text-sm font-semibold text-primary">Топовый event-специалист 2024</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 fade-in">
+              <span className="text-gradient">Превращаю идеи</span><br />
+              <span className="text-foreground">в незабываемые</span><br />
+              <span className="bg-gradient-to-r from-accent via-secondary to-primary bg-clip-text text-transparent">праздники</span>
+            </h1>
+            
+            <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed fade-in">
+              Организую мероприятия любого формата под ключ: от концепции до последнего танца.
+              Работаю с душой, создаю атмосферу, делаю так, чтобы гости просили продолжения.
+            </p>
+            
+            <div className="flex gap-4 justify-center flex-wrap mb-12 fade-in">
+              <Button size="lg" className="bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 hover-scale text-lg px-10 py-7 shadow-2xl shadow-primary/40">
+                <Icon name="Sparkles" className="mr-2" size={20} />
+                Обсудить мероприятие
+              </Button>
+              <Button size="lg" variant="outline" className="hover-scale text-lg px-10 py-7 border-2 border-primary/50 text-foreground hover:bg-primary/10 backdrop-blur-sm">
+                <Icon name="Play" className="mr-2" size={20} />
+                Смотреть шоурил
+              </Button>
+            </div>
           </div>
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 text-gradient fade-in">
-            Ваше Мероприятие —<br />Моя Миссия!
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto fade-in">
-            Профессиональное проведение свадеб, корпоративов, юбилеев и игровых вечеров.<br />
-            Опыт 8+ лет • 500+ мероприятий • 100% энергии
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap fade-in">
-            <Button size="lg" className="bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 hover-scale text-lg px-8">
-              <Icon name="Calendar" className="mr-2" />
-              Забронировать дату
-            </Button>
-            <Button size="lg" variant="outline" className="hover-scale text-lg px-8 border-primary text-primary hover:bg-primary hover:text-white">
-              <Icon name="Play" className="mr-2" />
-              Посмотреть видео
-            </Button>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto fade-in">
+            <Card className="p-6 text-center bg-card/50 backdrop-blur-sm border-border/50 hover-scale">
+              <div className="text-4xl mb-2">🎭</div>
+              <div className="text-3xl font-bold text-gradient mb-1">500+</div>
+              <div className="text-sm text-muted-foreground">Проведённых событий</div>
+            </Card>
+            <Card className="p-6 text-center bg-card/50 backdrop-blur-sm border-border/50 hover-scale">
+              <div className="text-4xl mb-2">⭐</div>
+              <div className="text-3xl font-bold text-gradient mb-1">8</div>
+              <div className="text-sm text-muted-foreground">Лет на сцене</div>
+            </Card>
+            <Card className="p-6 text-center bg-card/50 backdrop-blur-sm border-border/50 hover-scale">
+              <div className="text-4xl mb-2">🎉</div>
+              <div className="text-3xl font-bold text-gradient mb-1">98%</div>
+              <div className="text-sm text-muted-foreground">Возвращаются снова</div>
+            </Card>
+            <Card className="p-6 text-center bg-card/50 backdrop-blur-sm border-border/50 hover-scale">
+              <div className="text-4xl mb-2">🏆</div>
+              <div className="text-3xl font-bold text-gradient mb-1">15+</div>
+              <div className="text-sm text-muted-foreground">Наград и дипломов</div>
+            </Card>
+          </div>
+
+          <div className="mt-16 flex flex-wrap justify-center gap-8 items-center text-muted-foreground text-sm fade-in">
+            <div className="flex items-center gap-2">
+              <Icon name="CheckCircle2" size={20} className="text-primary" />
+              <span>Полное сопровождение</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Icon name="CheckCircle2" size={20} className="text-primary" />
+              <span>Авторские сценарии</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Icon name="CheckCircle2" size={20} className="text-primary" />
+              <span>Своё оборудование</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Icon name="CheckCircle2" size={20} className="text-primary" />
+              <span>Гарантия вау-эффекта</span>
+            </div>
           </div>
         </div>
       </section>
