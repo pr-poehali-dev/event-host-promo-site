@@ -199,7 +199,7 @@ const Index = () => {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 mb-8 fade-in">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-              <span className="text-sm font-semibold text-primary">Топовый event-специалист 2024</span>
+              <span className="text-sm font-semibold text-primary">Топовый event-специалист 2026</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 fade-in">
